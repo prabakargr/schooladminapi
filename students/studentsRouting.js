@@ -3,6 +3,7 @@ var studentsController=require('./studentsController');
 var studentsRouting=express.Router();
 
 studentsRouting.route('/createstudent').post(studentsController.createstudent);
+studentsRouting.route('/getstudents').get(studentsController.getAllStudents);
 
 
 module.exports=studentsRouting

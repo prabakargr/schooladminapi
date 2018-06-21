@@ -12,6 +12,17 @@ var createstudent=function(req,res){
     })
 }
 
+var getAllStudents=function(req,res){
+    studentModel.find(function(err,students){
+        if(err){
+            res.status(500).send('err')
+        }else{
+            res.send(students)
+        }
+    })
+}
+
 module.exports={
-    createstudent:createstudent
+    createstudent:createstudent,
+    getAllStudents:getAllStudents
 }
