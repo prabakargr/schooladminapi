@@ -6,7 +6,8 @@ const app=express()
 
 const db=mongoose.connect("mongodb://school:admin1@ds263740.mlab.com:63740/schooladmin")
 
-const studentsRouting=require('./students/studentsRouting')
+const studentsRouting=require('./students/studentsRouting');
+const teachersRouting=require('./teachers/teachersRouting')
 
 
 app.use(bodyParser.json());
@@ -14,11 +15,12 @@ app.use(bodyParser.urlencoded({ extended: false}));
 
 app.use(function(req, res, next) {  
     res.header('Access-Control-Allow-Origin', req.headers.origin);
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,x-access-token");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type,application/json, Accept,x-access-token");
     next();
 });
 
-app.use('/students',studentsRouting)
+app.use('/students',studentsRouting);
+app.use('/teachers',teachersRouting);
 
 
 var port=process.env.PORT || (4000);
