@@ -12,6 +12,8 @@ var createstudent = function(req, res) {
     })
 }
 
+
+
 var getAllStudents = function(req, res) {
     studentModel.find(function(err, students) {
         if (err) {
