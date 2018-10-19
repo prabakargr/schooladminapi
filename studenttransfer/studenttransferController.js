@@ -1,10 +1,10 @@
-const studentModel = require('./studentModel')
-const express = require('./studentModel');
+const studentTransferModel = require('./studenttransferModel');
+const express = require('./studenttransferModel');
 const app = express()
 
 var createstudent = function(req, res) {
-    var student = new studentModel(req.body)
-    student.save(function(err, result) {
+    var studentTransfer = new studentModel(req.body)
+    studentTransfer.save(function(err, result) {
         if (err) return res.send('cannot add')
         else {
             res.send(result)
@@ -13,9 +13,8 @@ var createstudent = function(req, res) {
 }
 
 
-
-var getAllStudents = function(req, res) {
-    studentModel.find(function(err, students) {
+var getAllStudentstransfer = function(req, res) {
+    studenttransferModel.find(function(err, students) {
         if (err) {
             res.status(500).send('err')
         } else {
@@ -24,9 +23,10 @@ var getAllStudents = function(req, res) {
     })
 }
 
+
 var deleteStudent=function(req,res){
     var _id=req.body._id
-    studentModel.findByIdAndRemove({_id},function(err,students){
+    studenttransferModel.findByIdAndRemove({_id},function(err,students){
             if(!err){
                 res.status(204);
                 res.send("removed");
@@ -36,7 +36,7 @@ var deleteStudent=function(req,res){
 }
 
 var getById=function(req,res){
-    studentModel.findById(req.params.id,function(err,students){
+    studenttransferModel.findById(req.params.id,function(err,students){
         if(err){
             res.status(404);
             res.send("can not found");
@@ -63,7 +63,7 @@ var updateStudent = function(req, res) {
     var motheroccupation = req.body.motheroccupation;
     console.log(_id);
 
-    studentModel.findByIdAndUpdate({ _id }, { name, fathername, aadharnumber, bloodgroup, dob, doj, fatheroccupation, gender, mobilenumber, mothername, standard, motheroccupation },
+    studenttransferModel.findByIdAndUpdate({ _id }, { name, fathername, aadharnumber, bloodgroup, dob, doj, fatheroccupation, gender, mobilenumber, mothername, standard, motheroccupation },
         function(err, student) {
             if (err) {
                 res.status(404).send('connot update')
@@ -73,7 +73,6 @@ var updateStudent = function(req, res) {
         })
 
 }
-
 
 
 module.exports = {
