@@ -10,7 +10,7 @@ const db = mongoose.connect("mongodb://school:admin1@ds263740.mlab.com:63740/sch
 
 const studentsRouting = require('./students/studentsRouting');
 const teachersRouting = require('./teachers/teachersRouting');
-const studenttransferRouting = require('./studenttransfer/studenttransferRouter');
+// const studenttransferRouting = require('./studenttransfer/studenttransferRouter');
 
 
 
@@ -25,7 +25,7 @@ app.use(function(req, res, next) {
 
 app.use('/students', studentsRouting);
 app.use('/teachers', teachersRouting);
-app.use('/studenttrasfer',studentsRouting);
+// app.use('/studenttrasfer',studentstransferRouting);
 
 
 var port = process.env.PORT || (4000);
