@@ -1,10 +1,10 @@
-const studentModel = require('../students/studentModel')
-const express = require('../students/studentModel');
+const studentTransferModel = require('./studentTransferModel')
+const express = require('./studentTransferModel');
 const app = express()
 
 var createstudentTransfer = function(req, res) {
-    var student = new studentModel(req.body)
-    student.save(function(err, result) {
+    var transfer = new studentTransferModel(req.body)
+    transfer.save(function(err, result) {
         if (err) return res.send('cannot add')
         else {
             res.send(result)
@@ -13,11 +13,11 @@ var createstudentTransfer = function(req, res) {
 }
 
 var getAllStudentsTransfer = function(req, res) {
-    studentModel.find(function(err, students) {
+    studentTransferModel.find(function(err, transfers) {
         if (err) {
             res.status(500).send('err')
         } else {
-            res.send(students)
+            res.send(transfers)
         }
     })
 }
@@ -26,7 +26,7 @@ var getAllStudentsTransfer = function(req, res) {
 
 var deleteStudentTransfer=function(req,res){
     var _id=req.body._id
-    studentModel.findByIdAndRemove({_id},function(err,students){
+    studentTransferModel.findByIdAndRemove({_id},function(err,transfers){
             if(!err){
                 res.status(204);
                 res.send("removed");
@@ -37,13 +37,13 @@ var deleteStudentTransfer=function(req,res){
 
 
 var getById=function(req,res){
-    studentModel.findById(req.params.id,function(err,students){
+    studentTransferModel.findById(req.params.id,function(err,transfers){
         if(err){
             res.status(404);
             res.send("can not found");
         }else{
             res.status(200);
-            res.send(students)
+            res.send(transfers)
         }
     })
 }
@@ -65,12 +65,12 @@ var updateStudentTransfer = function(req, res) {
     var motheroccupation = req.body.motheroccupation;
     console.log(_id);
 
-    studentModel.findByIdAndUpdate({ _id }, { name, fathername, aadharnumber, bloodgroup, dob, doj, fatheroccupation, gender, mobilenumber, mothername, standard, motheroccupation },
-        function(err, student) {
+    studentTransferModel.findByIdAndUpdate({ _id }, { name, fathername, aadharnumber, bloodgroup, dob, doj, fatheroccupation, gender, mobilenumber, mothername, standard, motheroccupation },
+        function(err, transfer) {
             if (err) {
                 res.status(404).send('connot update')
             } else {
-                res.status(200).send(student);
+                res.status(200).send(transfer);
             }
         })
 

@@ -2,7 +2,7 @@ const mongoose=require('mongoose');
 
 const Schema=mongoose.Schema
 
-const studentsModel=new Schema({
+const studentsTransferModel=new Schema({
     name:String,
     gender:String,
     fathername:String,
@@ -23,4 +23,4 @@ const studentsModel=new Schema({
 
 })
 
-module.exports=mongoose.model('student',studentsModel);
+module.exports=mongoose.model('transfer',studentsTransferModel);
