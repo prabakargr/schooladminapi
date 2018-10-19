@@ -3,7 +3,7 @@ const express = require('./studenttransferModel');
 const app = express()
 
 var createstudent = function(req, res) {
-    var studentTransfer = new studentModel(req.body)
+    var studentTransfer = new studentTransferModel(req.body)
     studentTransfer.save(function(err, result) {
         if (err) return res.send('cannot add')
         else {
