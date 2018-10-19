@@ -2,7 +2,7 @@ const studentTransferModel = require('./studenttransferModel');
 const express = require('./studenttransferModel');
 const app = express()
 
-var createstudent = function(req, res) {
+var createstudenttransfer = function(req, res) {
     var studentTransfer = new studentTransferModel(req.body)
     studentTransfer.save(function(err, result) {
         if (err) return res.send('cannot add')
@@ -24,7 +24,7 @@ var getAllStudentstransfer = function(req, res) {
 }
 
 
-var deleteStudent=function(req,res){
+var deleteStudenttransfer=function(req,res){
     var _id=req.body._id
     studenttransferModel.findByIdAndRemove({_id},function(err,students){
             if(!err){
@@ -47,7 +47,7 @@ var getById=function(req,res){
     })
 }
 
-var updateStudent = function(req, res) {
+var updateStudenttransfer = function(req, res) {
     var _id = req.params._id;
     var name = req.body.name;
     var fathername = req.body.fathername;
@@ -76,9 +76,9 @@ var updateStudent = function(req, res) {
 
 
 module.exports = {
-    createstudent: createstudent,
-    getAllStudents: getAllStudents,
-    updateStudent: updateStudent,
-    deleteStudent:deleteStudent,
+    createstudenttransfer: createstudenttransfer,
+    getAllStudentstransfer: getAllStudentstransfer,
+    updateStudenttransfer: updateStudenttransfer,
+    deleteStudenttransfer:deleteStudenttransfer,
     getById:getById
 }
