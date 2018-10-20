@@ -18,7 +18,8 @@ const studentsTransferModel=new Schema({
     reason:String,
     tostd:String,
     school:String,
-    date:String
+    date:String,
+    _id:String
 
 
 })
