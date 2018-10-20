@@ -1,21 +1,21 @@
 const studentTransferModel = require('./studentTransferModel')
-// const studentModel = require('../students/studentModel');
+const studentModel = require('../students/studentModel');
 const express = require('./studentTransferModel');
 const app = express()
 
 var createstudentTransfer = function(req, res) {
     var transfer = new studentTransferModel(req.body)
-    // var _id=req.body._id
+    var _id=req.body._id
     transfer.save(function(err, result) {
         if (err) return res.send('cannot add')
         else {
             res.send(result)
-        //     studentModel.findByIdAndRemove({_id},function(err,students){
-        //         if(!err){
-        //             res.status(204);
-        //             res.send("removed");
-        //         }
-        //    })
+            studentModel.findByIdAndRemove({_id},function(err,students){
+                if(!err){
+                    res.status(204);
+                    res.send("removed");
+                }
+           })
         }
     })
 }
