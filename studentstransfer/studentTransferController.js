@@ -6,16 +6,11 @@ const app = express()
 var createstudentTransfer = function(req, res) {
     var transfer = new studentTransferModel(req.body)
     // var _id=req.body._id
+    console.log(transfer)
     transfer.save(function(err, result) {
         if (err) return res.send('cannot add')
         else {
             res.send(result)
-        //     studentModel.findByIdAndRemove({_id},function(err,students){
-        //         if(!err){
-        //             res.status(204);
-        //             res.send("removed");
-        //         }
-        //    })
         }
     })
 }
