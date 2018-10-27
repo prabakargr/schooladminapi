@@ -11,7 +11,7 @@ const db = mongoose.connect("mongodb://school:admin1@ds263740.mlab.com:63740/sch
 const studentsRouting = require('./students/studentsRouting');
 const teachersRouting = require('./teachers/teachersRouting');
 const studentsTransferRouting = require('./studentstransfer/studentTransferRouting');
-const examRouting = require('./exam/examRouting');
+// const examRouting = require('./exam/examRouting');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,7 +25,7 @@ app.use(function(req, res, next) {
 app.use('/students', studentsRouting);
 app.use('/teachers', teachersRouting);
 app.use('/studenttransfer',studentsTransferRouting);
-app.use('/exam',examRouting);
+// app.use('/exam',examRouting);
 var port = process.env.PORT || (4000);
 
 app.listen(port, () => console.log(`Running on localhost:4000`));
