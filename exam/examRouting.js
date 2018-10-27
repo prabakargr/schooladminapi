@@ -8,4 +8,4 @@ examRouting.route('/getExam').get(examController.getAllExam);
 examRouting.route('/updateExam/:_id').post(examController.updateExam);
 examRouting.route('/deleteExam').post(examController.deleteExam);
 examRouting.route('/:id').get(examController.getById);
-module.exports = ExamRouting
+module.exports = examRouting
