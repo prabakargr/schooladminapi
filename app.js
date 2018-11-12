@@ -12,7 +12,7 @@ const app = express()
 
 
   
-const db = mongoose.connect("mongodb://school:admin1@ds263740.mlab.com:63740/schooladmin")
+const db = mongoose.connect("mongodb://school:admin1@ds263740.mlab.com:63740/schooladmin",{useNewUrlParser:true})
     // const db = mongoose.connect("mongodb://localhost:27017/schoolApp")
 
 const studentsRouting = require('./students/studentsRouting');

@@ -14,11 +14,7 @@ app.set('superSecret', config.secret);
 var adduser=function (req,res){
     var token = req.headers['x-access-token'];
 
-    if(token){
-        jwt.verify(token,app.get('superSecret'),function(err,decoded){
-            if(err){
-                return res.json({success:false,message:'failed to authenticate token.'});
-            }else{
+              
                 var id={
                     email:req.body.email,
                 }
@@ -33,8 +29,11 @@ var adduser=function (req,res){
                                 var data={
                                     message:'User added successfully',
                                     user:user
-                                }
+                                } 
+                                
                                 return res.send(data)
+
+                              
                             }
                             
                         });
@@ -45,14 +44,8 @@ var adduser=function (req,res){
                         return res.send(data)
                     }
                 })
-            }
-        });
-    } else {
-        return res.status(403).send({
-            success:false,
-            message:'No token provided.'
-        });
-    };
+           
+
 }
 
 var getusers=function(req,res){
@@ -96,7 +89,9 @@ var login=function(req,res){
         email: req.body.email
       }, function(err, user) {
     
-        if (err) throw err;
+        if (err) {
+            message:"login faild"
+        }
     
         if (!user) {
           res.json({ success: false, message: 'Authentication failed. User not found.' });
@@ -113,8 +108,7 @@ var login=function(req,res){
         const payload = {
           id:user.id,
           email:user.email,
-          username:user.username,  
-          role: user.role 
+         
         };
         console.log(payload);
             var token = jwt.sign(payload, app.get('superSecret'),{
