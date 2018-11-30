@@ -16,6 +16,7 @@ const sportsModel=new Schema({
     motheroccupation:String,
     name:String,
     standard:String,
+    gender:String
 
  
 })
