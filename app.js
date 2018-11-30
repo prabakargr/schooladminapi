@@ -6,7 +6,7 @@ var morgan      = require('morgan');
 var path = require("path");
 
 // var app = express();
-var db = mongoose.connect("mongodb://school:admin1@ds263740.mlab.com:63740/schooladmin", { useNewUrlParser: true });
+var db = mongoose.connect("mongodb://school:admin1@ds263740.mlab.com:63740/schooladmin");
 
 const mongodb = require('mongodb');
 var config = require('./config');
