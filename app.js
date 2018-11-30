@@ -5,22 +5,22 @@ const mongoose = require('mongoose');
 var morgan      = require('morgan');
 var path = require("path");
 
-var app = express();
+// var app = express();
 var db = mongoose.connect("mongodb://school:admin1@ds263740.mlab.com:63740/schooladmin", { useNewUrlParser: true });
 
-// const mongodb = require('mongodb');
-// var config = require('./config');
-// const app = express()
+const mongodb = require('mongodb');
+var config = require('./config');
+const app = express()
 
-// app.set('superSecret', config.secret);
+app.set('superSecret', config.secret);
 
 
 
-// process.env.PWD = process.cwd();
+process.env.PWD = process.cwd();
 
-// app.set('views', path.join(process.env.PWD, 'public'));
+app.set('views', path.join(process.env.PWD, 'public'));
 
-// app.use('/swagger',express.static(path.join(process.env.PWD, 'public')));
+app.use('/swagger',express.static(path.join(process.env.PWD, 'public')));
 
   
     // const db = mongoose.connect("mongodb://localhost:27017/schoolApp")
