@@ -6,7 +6,7 @@ var morgan      = require('morgan');
 var path = require("path");
 
 // var app = express();
-var db = mongoose.connect("mongodb://school:admin1@ds263740.mlab.com:63740/schooladmin");
+var db = mongoose.connect("mongodb://school:admin1@ds263740.mlab.com:63740/schooladmin",{ useNewUrlParser: true });
 
 const mongodb = require('mongodb');
 var config = require('./config');
@@ -30,6 +30,7 @@ const teachersRouting = require('./teachers/teachersRouting');
 const studentsTransferRouting = require('./studentstransfer/studentTransferRouting');
 const examRouting = require('./exam/examRouting');
 const usersRouting = require('./users/usersRouting');
+const sportsRouting = require('./sports/sportsRouting');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -44,6 +45,8 @@ app.use('/teachers', teachersRouting);
 app.use('/studenttransfer',studentsTransferRouting);
 app.use('/exam',examRouting);
 app.use('/users',usersRouting);
+app.use('/sports',sportsRouting);
+
 var port = process.env.PORT || (3000);
 
 app.listen(port, () => console.log(`Running on localhost:3000`));
