@@ -17,11 +17,12 @@ var createstudent = function(req, res) {
 var getAllStudents = function(req, res) {
     studentModel.find(function(err, students) {
         if (err) {
+            console.log('err')
             res.status(500).send('err')
         } else {
             res.send(students)
         }
-    })
+    }) 
 }
 
 var deleteStudent=function(req,res){

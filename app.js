@@ -5,22 +5,22 @@ const mongoose = require('mongoose');
 var morgan      = require('morgan');
 var path = require("path");
 
+var app = express();
+var db = mongoose.connect("mongodb://school:admin1@ds263740.mlab.com:63740/schooladmin", { useNewUrlParser: true });
+
 // const mongodb = require('mongodb');
-var config = require('./config');
-const app = express()
+// var config = require('./config');
+// const app = express()
 
-app.set('superSecret', config.secret);
+// app.set('superSecret', config.secret);
 
-app.use(function (req, res, next) {
-    res.setHeader('X-Powered-By', 'Triodesk')
-    next()
-  })
 
-process.env.PWD = process.cwd();
 
-app.set('views', path.join(process.env.PWD, 'public'));
+// process.env.PWD = process.cwd();
 
-app.use('/swagger',express.static(path.join(process.env.PWD, 'public')));
+// app.set('views', path.join(process.env.PWD, 'public'));
+
+// app.use('/swagger',express.static(path.join(process.env.PWD, 'public')));
 
   
     // const db = mongoose.connect("mongodb://localhost:27017/schoolApp")
@@ -44,6 +44,6 @@ app.use('/teachers', teachersRouting);
 app.use('/studenttransfer',studentsTransferRouting);
 app.use('/exam',examRouting);
 app.use('/users',usersRouting);
-var port = process.env.PORT || (4000);
+var port = process.env.PORT || (3000);
 
-app.listen(port, () => console.log(`Running on localhost:4000`));
+app.listen(port, () => console.log(`Running on localhost:3000`));
