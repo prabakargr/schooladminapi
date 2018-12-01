@@ -46,6 +46,15 @@ var getById=function(req,res){
     })
 }
 
+var findGender = function(req, res) {
+    var gender = req.body.gender;
+    sportsModel.findOne({ gender }, function(err, result) {
+        var data = {}
+        if (err) return res.send(data);
+        else return res.send(result);
+    })
+}
+
 var updateSports = function(req, res) {
     var _id = req.params._id;
     var JoinDateSports = req.body.JoinDateSports;
@@ -61,10 +70,12 @@ var updateSports = function(req, res) {
     var name = req.body.name;
     var standard = req.standard;
     var weight =req.weight;
+    var gender = req.gender;
+    var sportsname = req.sportsname
     console.log(_id);
 
-    sportsModel.findByIdAndUpdate({ _id }, { JoinDateSports,aadharnumberject, bloodgroup, dob,doj, fathername,fatheroccupation,height,
-        mothername,motheroccupation,name,standard,weight},
+    sportsModel.findByIdAndUpdate({ _id }, { JoinDateSports,aadharnumberject,bloodgroup, dob,doj, fathername,fatheroccupation,height,
+        mothername,motheroccupation,name,standard,weight,gender,sportsname},
         function(err,sports) {
             if (err) {
                 res.status(404).send('connot update')
@@ -81,5 +92,6 @@ module.exports = {
     getAllSports: getAllSports,
     deleteSports: deleteSports,
     updateSports:updateSports,
-    getById:getById
+    getById:getById,
+    findGender:findGender
 }

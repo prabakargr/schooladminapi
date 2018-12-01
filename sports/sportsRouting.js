@@ -8,4 +8,5 @@ sportsRouting.route('/getSports').get(sportsController.getAllSports);
 sportsRouting.route('/updateSports/:_id').post(sportsController.updateSports);
 sportsRouting.route('/deleteSports').post(sportsController.deleteSports);
 sportsRouting.route('/:id').get(sportsController.getById);
+sportsRouting.route('/findgender').post(sportsController.findGender);
 module.exports = sportsRouting
