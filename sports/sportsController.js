@@ -1,6 +1,6 @@
 const sportsModel = require('../sports/sportsModel');
 const express = require('../sports/sportsModel');
-const app = express()
+const app = express();
 
 var createSports= function(req, res) {
     var sports = new sportsModel(req.body)
@@ -24,8 +24,9 @@ var getAllSports = function(req, res) {
 }
 
 var deleteSports=function(req,res){
-    var _id=req.body._id
-    sportsModel.findByIdAndRemove({_id},function(err,exams){
+    var _id=req.body._id;
+    console.log("user _id"+_id)
+    sportsModel.findByIdAndRemove({_id},function(err,sports){
             if(!err){
                 res.status(204);
                 res.send("removed");
@@ -34,24 +35,29 @@ var deleteSports=function(req,res){
 
 }
 
+
+
+
 var getById=function(req,res){
-    sportsModel.findById(req.params.id,function(err,exams){
+    sportsModel.findById(req.params.id,function(err,sports){
         if(err){
             res.status(404);
             res.send("can not found");
         }else{
             res.status(200);
-            res.send(exams)
+            res.send(sports)
         }
     })
 }
 
 var findGender = function(req, res) {
     var gender = req.body.gender;
-    sportsModel.findOne({ gender }, function(err, result) {
-        var data = {}
-        if (err) return res.send(data);
+    console.log(gender);
+    sportsModel.find({gender}, function(err, result) {
+        console.log(result);
+        if (err) return res.send("err");
         else return res.send(result);
+
     })
 }
 

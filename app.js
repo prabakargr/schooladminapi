@@ -31,9 +31,11 @@ const studentsTransferRouting = require('./studentstransfer/studentTransferRouti
 const examRouting = require('./exam/examRouting');
 const usersRouting = require('./users/usersRouting');
 const sportsRouting = require('./sports/sportsRouting');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
+app.set('json spaces', 40);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ type: 'application/*+json' }));
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', req.headers.origin);
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type,application/json, Accept,x-access-token");
