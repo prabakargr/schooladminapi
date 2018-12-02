@@ -61,6 +61,17 @@ var findGender = function(req, res) {
     })
 }
 
+var findStudentLevel = function(req,res){
+    var gender = req.body.gender;
+    var studentlevel = req.body.studentlevel;
+    console.log(gender,studentlevel);
+    sportsModel.find({gender,studentlevel},function(err,result){
+        console.log(result);
+        if(err) return res.send("err");
+        else return res.send(result);
+    })
+}
+
 var updateSports = function(req, res) {
     var _id = req.params._id;
     var JoinDateSports = req.body.JoinDateSports;
