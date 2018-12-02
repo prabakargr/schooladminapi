@@ -17,7 +17,8 @@ const sportsModel=new Schema({
     name:String,
     standard:String,
     gender:String,
-    sportsname:String
+    sportsname:String,
+    studentlevel:String
 
 })
 module.exports=mongoose.model('sports',sportsModel);
