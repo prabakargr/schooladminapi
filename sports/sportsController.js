@@ -110,5 +110,6 @@ module.exports = {
     deleteSports: deleteSports,
     updateSports:updateSports,
     getById:getById,
-    findGender:findGender
+    findGender:findGender,
+    findStudentLevel:findStudentLevel
 }
