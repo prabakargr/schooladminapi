@@ -64,8 +64,9 @@ var findGender = function(req, res) {
 var findStudentLevel = function(req,res){
     var gender = req.body.gender;
     var studentlevel = req.body.studentlevel;
-    console.log(gender,studentlevel);
-    sportsModel.find({gender,studentlevel},function(err,result){
+    var sportsname = req.body.sportsname
+    console.log(gender,studentlevel,sportsname);
+    sportsModel.find({gender,studentlevel,sportsname},function(err,result){
         console.log(result);
         if(err) return res.send("err");
         else return res.send(result);
