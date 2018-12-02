@@ -73,6 +73,16 @@ var findStudentLevel = function(req,res){
     })
 }
 
+var findByStandard =function(req,res){
+    var standard = req.body.standard;
+    console.log(standard);
+    sportsModel.find({standard},function(err,result){
+        console.log(result);
+        if(err) return res.send("err");
+        else return res.send(result);
+    })
+}
+
 var updateSports = function(req, res) {
     var _id = req.params._id;
     var JoinDateSports = req.body.JoinDateSports;
@@ -112,5 +122,6 @@ module.exports = {
     updateSports:updateSports,
     getById:getById,
     findGender:findGender,
-    findStudentLevel:findStudentLevel
+    findStudentLevel:findStudentLevel,
+    findByStandard:findByStandard
 }
