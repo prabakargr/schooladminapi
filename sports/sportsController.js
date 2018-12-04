@@ -91,11 +91,12 @@ var updateSports = function(req, res) {
     var standard = req.standard;
     var weight =req.weight;
     var gender = req.gender;
-    var sportsname = req.sportsname
+    var sportsname = req.sportsname;
+    var studentlevel =req.studentlevel;
     console.log(_id);
 
     sportsModel.findByIdAndUpdate({ _id }, { JoinDateSports,height,
-     name,standard,weight,gender,sportsname},
+     name,standard,weight,gender,sportsname,studentlevel},
         function(err,sports) {
             if (err) {
                 res.status(404).send('connot update')
