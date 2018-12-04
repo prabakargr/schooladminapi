@@ -139,5 +139,5 @@ module.exports = {
     findStudentLevel:findStudentLevel,
     findByStandard:findByStandard,
     findlevel:findlevel,
-    findByStandard:findByStandard
+    findsportname:findsportname
 }
