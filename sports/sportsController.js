@@ -61,6 +61,16 @@ var findGender = function(req, res) {
     })
 }
 
+var findsportname =function(req,res){
+    var sportsname =req.body.sportsname;
+    console.log(sportsname);
+    sportsModel.find({sportsname},function(err,result){
+        console.log(result);
+        if(err) return res.send("err");
+        else return res.send(result);
+    })
+}
+
 var findStudentLevel = function(req,res){
     var gender = req.body.gender;
     var studentlevel = req.body.studentlevel;
@@ -77,6 +87,16 @@ var findByStandard =function(req,res){
     var standard = req.body.standard;
     console.log(standard);
     sportsModel.find({standard},function(err,result){
+        console.log(result);
+        if(err) return res.send("err");
+        else return res.send(result);
+    })
+}
+
+var findlevel = function(req,res){
+    var studentlevel =req.body.studentlevel;
+    console.log(studentlevel);
+    sportsModel.find({studentlevel},function(err,result){
         console.log(result);
         if(err) return res.send("err");
         else return res.send(result);
@@ -117,5 +137,7 @@ module.exports = {
     getById:getById,
     findGender:findGender,
     findStudentLevel:findStudentLevel,
+    findByStandard:findByStandard,
+    findlevel:findlevel,
     findByStandard:findByStandard
 }

@@ -11,4 +11,6 @@ sportsRouting.route('/:id').get(sportsController.getById);
 sportsRouting.route('/findgender').post(sportsController.findGender);
 sportsRouting.route('/findstudentlevel').post(sportsController.findStudentLevel);
 sportsRouting.route('/findbystandard').post(sportsController.findByStandard);
+sportsRouting.route('/findlevel').post(sportsController.findlevel);
+sportsRouting.route('/findsportsname').post(sportsController.findByStandard);
 module.exports = sportsRouting
