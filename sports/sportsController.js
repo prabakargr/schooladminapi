@@ -93,6 +93,7 @@ var updateSports = function(req, res) {
     var gender = req.body.gender;
     var sportsname = req.body.sportsname;
     var studentlevel =req.body.studentlevel;
+    var studentKey =req.body.studentKey;
     console.log(_id);
 
     sportsModel.findByIdAndUpdate({ _id }, { JoinDateSports,height,
