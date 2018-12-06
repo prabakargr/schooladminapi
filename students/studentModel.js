@@ -21,6 +21,10 @@ const studentsModel=new Schema({
         streetname:String,
         cityname:String,
         statename:String
+    },
+    schoolofyear:{
+        from:String,
+        end:String
     }
 })
 
