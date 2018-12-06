@@ -17,7 +17,7 @@ const studentsModel=new Schema({
     motheroccupation:String,
     rollno:String,
     fathermobilenumber:String,
-    address={
+    address:{
         streetname:String,
         cityname:String,
         statename:String
