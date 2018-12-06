@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 var morgan      = require('morgan');
 var path = require("path");
+var fs=require('fs');
+var multer=require('multer');
 
 // var app = express();
 var db = mongoose.connect("mongodb://school:admin1@ds263740.mlab.com:63740/schooladmin",{ useNewUrlParser: true });
@@ -13,6 +15,8 @@ var config = require('./config');
 const app = express()
 
 app.set('superSecret', config.secret);
+
+
 
 
 

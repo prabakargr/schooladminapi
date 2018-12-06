@@ -1,6 +1,8 @@
 const studentModel = require('./studentModel')
 const express = require('./studentModel');
-const app = express()
+const app = express();
+var multer=require('multer');
+
 
 var createstudent = function(req, res) {
     var student = new studentModel(req.body)

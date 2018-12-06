@@ -14,8 +14,14 @@ const studentsModel=new Schema({
     standard:String,
     bloodgroup:String,
     fatheroccupation:String,
-    motheroccupation:String
-
+    motheroccupation:String,
+    rollno:String,
+    fathermobilenumber:String,
+    address={
+        streetname:String,
+        cityname:String,
+        statename:String
+    }
 })
 
 module.exports=mongoose.model('student',studentsModel);
