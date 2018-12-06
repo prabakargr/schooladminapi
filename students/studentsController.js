@@ -1,7 +1,7 @@
 const studentModel = require('./studentModel')
 const express = require('./studentModel');
 const app = express();
-
+const sportsModel = require('../sports/sportsModel');
 
 var createstudent = function(req, res) {
     var student = new studentModel(req.body)
@@ -72,8 +72,15 @@ var updateStudent = function(req, res) {
             } else {
                 res.status(200).send(student);
             }
-        })
+        });
+        sportsModel.findOneAndUpdate({_id},{standard}),
+        function(err,sports){
+            if(err){
+                res.status(404).send('cannot update');
 
+            }else {res.status(200).send(sports)};
+        }
+    
 }
 
 
