@@ -29,7 +29,7 @@ var deleteSports=function(req,res){
     sportsModel.findByIdAndRemove({_id},function(err,sports){
             if(!err){
                 res.status(204);
-                res.send("removed");
+                res.send(sports);
             }
         });
 

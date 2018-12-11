@@ -23,9 +23,10 @@ const studentsModel=new Schema({
         statename:String
     },
     schoolofyear:{
-        from:String,
-        end:String
+        from:'',
+        end:''
     }
-})
+});
+
 
 module.exports=mongoose.model('student',studentsModel);

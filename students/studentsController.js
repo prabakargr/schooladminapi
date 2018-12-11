@@ -3,16 +3,20 @@ const express = require('./studentModel');
 const app = express();
 const sportsModel = require('../sports/sportsModel');
 
-var createstudent = function(req, res) {
-    var student = new studentModel(req.body)
-    student.save(function(err, result) {
-        if (err) return res.send('cannot add')
-        else {
-            res.send(result)
-        }
-    })
-}
 
+var createStudent = async function(req,res){
+         var student = new studentModel(req.body);
+         await student.save();
+         var sport = new sportsModel()
+         sport.rollno = student.rollno;
+         sport.name = student.name;
+         sport.gender = student.gender;
+         sport.standard = student.standard;
+         sport.save();
+         res.json(sport);
+
+
+} 
 
 
 var getAllStudents = function(req, res) {
@@ -49,7 +53,7 @@ var getById=function(req,res){
     })
 }
 
-var updateStudent = function(req, res) {
+var updateStudent = async function(req, res) {
     var _id = req.params._id;
     var name = req.body.name;
     var fathername = req.body.fathername;
@@ -63,9 +67,18 @@ var updateStudent = function(req, res) {
     var mothername = req.body.mothername;
     var standard = req.body.standard;
     var motheroccupation = req.body.motheroccupation;
+    var streetname = req.body.address.streetname;
+    var statename =req.body.address.statename;
+    var cityname = req.body.address.cityname;
+    var from = req.body.schoolofyear.from;
+    var end = req.body.schoolofyear.end;
     console.log(_id);
 
-    studentModel.findByIdAndUpdate({ _id }, { name, fathername, aadharnumber, bloodgroup, dob, doj, fatheroccupation, gender, mobilenumber, mothername, standard, motheroccupation },
+    studentModel.findByIdAndUpdate({ _id }, 
+        { name,fathername,aadharnumber,bloodgroup,dob,doj,fatheroccupation,gender,mobilenumber,mothername,standard,motheroccupation ,
+            address:{streetname,cityname,statename},
+            schoolofyear:{from,end}
+        },
         function(err, student) {
             if (err) {
                 res.status(404).send('connot update')
@@ -73,20 +86,23 @@ var updateStudent = function(req, res) {
                 res.status(200).send(student);
             }
         });
-        sportsModel.findOneAndUpdate({_id},{standard}),
-        function(err,sports){
-            if(err){
-                res.status(404).send('cannot update');
-
-            }else {res.status(200).send(sports)};
-        }
-    
 }
 
-
+// var sportsUpdate = function(req,res){
+//     var _id = req.params._id;
+//     console.log(_id)
+//     sportsModel.findOneAndUpdate({studentKey},{standard},
+//         function(err,sports){
+//             if(err){
+//                 res.status(404).send('can not update');
+//             }else{
+//                 res.status(200).send(sports)
+//             }
+//         })
+// }
 
 module.exports = {
-    createstudent: createstudent,
+    createStudent: createStudent,
     getAllStudents: getAllStudents,
     updateStudent: updateStudent,
     deleteStudent:deleteStudent,
