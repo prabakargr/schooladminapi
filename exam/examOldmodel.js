@@ -2,7 +2,7 @@ const mongoose=require('mongoose');
 
 const Schema=mongoose.Schema
 
-const examModel=new Schema({
+const oldexamModel=new Schema({
       examName:String,
       subject:String,
       standard:String,
@@ -14,4 +14,4 @@ const examModel=new Schema({
 
  
 })
-module.exports=mongoose.model('exam',examModel);
+module.exports=mongoose.model('oldexam',oldexamModel);

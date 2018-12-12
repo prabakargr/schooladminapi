@@ -1,4 +1,5 @@
-const examModel = require('../exam/examModel')
+const examModel = require('../exam/examModel');
+const oldexamModel = require('../exam/examOldmodel')
 const express = require('../exam/examModel');
 const app = express()
 
@@ -23,6 +24,17 @@ var getAllExam = function(req, res) {
     })
 }
 
+
+var getAllOldExam =function(req,res){
+    oldexamModel.find(function(err,exams){
+        if(err){
+            res.status(500).send('err')
+        }else {
+            res.send(exams);
+        }
+    });
+}
+
 var deleteExam=function(req,res){
     var _id=req.body._id
     examModel.findByIdAndRemove({_id},function(err,exams){
@@ -33,6 +45,18 @@ var deleteExam=function(req,res){
         });
 
 }
+
+
+var oldExamcreate= function(req, res) {
+    var oldexam = new oldexamModel(req.body)
+    oldexam.save(function(err, result) {
+        if (err) return res.send('cannot add')
+        else {
+            res.send(result)
+        }
+    })
+}
+
 
 var getById=function(req,res){
     examModel.findById(req.params.id,function(err,exams){
@@ -45,6 +69,18 @@ var getById=function(req,res){
         }
     })
 }
+
+var findByStandardAndExam =function(req,res){
+    var standard = req.body.standard;
+    var examName =req.body.examName;
+    console.log(standard,examName);
+    examModel.find({standard,examName},function(err,result){
+        console.log(result);
+        if(err) return res.send("err");
+        else return res.send(result);
+    })
+}
+
 
 var updateExam = function(req, res) {
     var _id = req.params._id;
@@ -71,5 +107,8 @@ module.exports = {
     getAllExam: getAllExam,
     updateExam: updateExam,
     deleteExam:deleteExam,
-    getById:getById
+    getById:getById,
+    findByStandardAndExam:findByStandardAndExam,
+    oldExamcreate:oldExamcreate,
+    getAllOldExam:getAllOldExam
 }
