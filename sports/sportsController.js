@@ -4,12 +4,23 @@ const app = express();
 
 var createSports= function(req, res) {
     var sports = new sportsModel(req.body)
-    sports.save(function(err, result) {
-        if (err) return res.send('cannot add')
-        else {
-            res.send(result)
-        }
+    var studentKey = req.body.studentKey;
+    console.log(studentKey)
+    
+    sportsModel.findOne({studentKey},function(err,result){
+       if(result==null){
+        sports.save(function(err, result) {
+            if (err) return res.send('cannot add')
+            else {
+                res.send(result)
+            }
+        })
+       }else{
+           res.send({"message":"failed"})
+       }
     })
+  
+   
 }
 
 

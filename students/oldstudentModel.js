@@ -22,7 +22,8 @@ const oldstudentsModel=new Schema({
         cityname:String,
         statename:String
     },
-    schoolofyear:String
+    schoolofyear:String,
+    studentKey:String
 });
 
 

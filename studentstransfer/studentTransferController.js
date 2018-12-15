@@ -1,6 +1,7 @@
 const studentTransferModel = require('./studentTransferModel')
 const studentModel = require('../students/studentModel');
 const oldStudentModel = require('../students/oldstudentModel');
+const sportsModel = require('../sports/sportsModel');
 const express = require('./studentTransferModel');
 const app = express()
 
@@ -28,9 +29,26 @@ var createstudentTransfer = async function(req, res) {
     student.address.statename=transfer.address.statename;
     student.address.cityname=transfer.address.cityname;
     student.schoolofyear=transfer.schoolofyear;
+    student.studentKey=transfer.studentKey;
+    var studentKey = transfer.studentKey;
+    var standard = transfer.tostd;
+    var rollno  = transfer.rollno;
     student.save();
     res.json(student)
-
+    if(standard==="12" || standard==="11"){
+        studentlevel = "supersenior"
+    }else if(standard==="10" || standard==="9"){
+        studentlevel = "senior"
+    }else {
+        studentlevel ="junior"
+    }
+    console.log(studentKey,studentlevel,standard);
+    sportsModel.findOneAndUpdate({rollno},{standard,studentlevel},
+        function(err,sports){
+           if(sports){
+               console.log("test"+sports)
+           }
+        })
     // var _id=req.body._id
     // console.log(transfer)
     // transfer.save(function(err, result) {

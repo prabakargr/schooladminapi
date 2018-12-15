@@ -72,10 +72,11 @@ var updateStudent =  function(req, res) {
     var statename =req.body.address.statename;
     var cityname = req.body.address.cityname;
     var schoolofyear = req.body.schoolofyear;
+    var rollno = req.body.rollno;
     var studentlevel;
     
      studentModel.findByIdAndUpdate({ _id }, 
-        { name,fathername,aadharnumber,bloodgroup,dob,doj,fatheroccupation,gender,mobilenumber,mothername,standard,motheroccupation ,
+        { name,fathername,aadharnumber,bloodgroup,dob,doj,fatheroccupation,gender,mobilenumber,mothername,standard,motheroccupation ,rollno,
             address:{streetname,cityname,statename},
             schoolofyear
         },
@@ -94,7 +95,7 @@ var updateStudent =  function(req, res) {
             studentlevel ="junior"
         }
         console.log(studentKey,studentlevel,standard);
-        sportsModel.findOneAndUpdate({studentKey},{standard,studentlevel},
+        sportsModel.findOneAndUpdate({rollno},{standard,studentlevel},
             function(err,sports){
                if(sports){
                    console.log("test"+sports)
