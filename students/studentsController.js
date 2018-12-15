@@ -1,23 +1,23 @@
 const studentModel = require('./studentModel')
 const express = require('./studentModel');
 const app = express();
+const oldStudentModel = require('./oldstudentModel');
 const sportsModel = require('../sports/sportsModel');
-
-
-var createStudent = async function(req,res){
+var createStudent = function(req,res){
          var student = new studentModel(req.body);
-         await student.save();
-         var sport = new sportsModel()
-         sport.rollno = student.rollno;
-         sport.name = student.name;
-         sport.gender = student.gender;
-         sport.standard = student.standard;
-         sport.save();
-         res.json(sport);
-
-
+         student.save(function(err,student){
+             if(err) return res.status(500).send('cannot add')
+             else return res.send(student);
+         })
 } 
 
+var createoldStudent = function(req,res){
+    var oldStudent  = new oldStudentModel(req.body)
+    oldStudent.save(function(err,oldstudent){
+        if(err) return res.status(500).send('cannot add')
+        else return res.send(oldstudent);
+    })
+}
 
 var getAllStudents = function(req, res) {
     studentModel.find(function(err, students) {
@@ -53,8 +53,9 @@ var getById=function(req,res){
     })
 }
 
-var updateStudent = async function(req, res) {
+var updateStudent =  function(req, res) {
     var _id = req.params._id;
+    var studentKey = req.params._id;
     var name = req.body.name;
     var fathername = req.body.fathername;
     var aadharnumber = req.body.aadharnumber;
@@ -70,14 +71,13 @@ var updateStudent = async function(req, res) {
     var streetname = req.body.address.streetname;
     var statename =req.body.address.statename;
     var cityname = req.body.address.cityname;
-    var from = req.body.schoolofyear.from;
-    var end = req.body.schoolofyear.end;
-    console.log(_id);
-
-    studentModel.findByIdAndUpdate({ _id }, 
+    var schoolofyear = req.body.schoolofyear;
+    var studentlevel;
+    
+     studentModel.findByIdAndUpdate({ _id }, 
         { name,fathername,aadharnumber,bloodgroup,dob,doj,fatheroccupation,gender,mobilenumber,mothername,standard,motheroccupation ,
             address:{streetname,cityname,statename},
-            schoolofyear:{from,end}
+            schoolofyear
         },
         function(err, student) {
             if (err) {
@@ -86,6 +86,20 @@ var updateStudent = async function(req, res) {
                 res.status(200).send(student);
             }
         });
+        if(standard==="12" || standard==="11"){
+            studentlevel = "supersenior"
+        }else if(standard==="10" || standard==="9"){
+            studentlevel = "senior"
+        }else {
+            studentlevel ="junior"
+        }
+        console.log(studentKey,studentlevel,standard);
+        sportsModel.findOneAndUpdate({studentKey},{standard,studentlevel},
+            function(err,sports){
+               if(sports){
+                   console.log("test"+sports)
+               }
+            })
 }
 
 // var sportsUpdate = function(req,res){
@@ -106,5 +120,6 @@ module.exports = {
     getAllStudents: getAllStudents,
     updateStudent: updateStudent,
     deleteStudent:deleteStudent,
-    getById:getById
+    getById:getById,
+    createoldStudent:createoldStudent
 }

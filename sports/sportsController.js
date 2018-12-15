@@ -25,7 +25,6 @@ var getAllSports = function(req, res) {
 
 var deleteSports=function(req,res){
     var _id=req.body._id;
-    console.log("user _id"+_id)
     sportsModel.findByIdAndRemove({_id},function(err,sports){
             if(!err){
                 res.status(204);
@@ -52,9 +51,7 @@ var getById=function(req,res){
 
 var findGender = function(req, res) {
     var gender = req.body.gender;
-    console.log(gender);
     sportsModel.find({gender}, function(err, result) {
-        console.log(result);
         if (err) return res.send("err");
         else return res.send(result);
 
@@ -65,7 +62,6 @@ var findsportname =function(req,res){
     var sportsname =req.body.sportsname;
     console.log(sportsname);
     sportsModel.find({sportsname},function(err,result){
-        console.log(result);
         if(err) return res.send("err");
         else return res.send(result);
     })
@@ -77,7 +73,6 @@ var findStudentLevel = function(req,res){
     var sportsname = req.body.sportsname
     console.log(gender,studentlevel,sportsname);
     sportsModel.find({gender,studentlevel,sportsname},function(err,result){
-        console.log(result);
         if(err) return res.send("err");
         else return res.send(result);
     })
@@ -87,7 +82,6 @@ var findByStandard =function(req,res){
     var standard = req.body.standard;
     console.log(standard);
     sportsModel.find({standard},function(err,result){
-        console.log(result);
         if(err) return res.send("err");
         else return res.send(result);
     })
@@ -97,7 +91,6 @@ var findlevel = function(req,res){
     var studentlevel =req.body.studentlevel;
     console.log(studentlevel);
     sportsModel.find({studentlevel},function(err,result){
-        console.log(result);
         if(err) return res.send("err");
         else return res.send(result);
     })
@@ -114,7 +107,6 @@ var updateSports = function(req, res) {
     var sportsname = req.body.sportsname;
     var studentlevel =req.body.studentlevel;
     var studentKey =req.body.studentKey;
-    console.log(_id);
 
     sportsModel.findByIdAndUpdate({ _id }, { JoinDateSports,height,
      name,standard,weight,gender,sportsname,studentlevel},

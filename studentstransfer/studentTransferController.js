@@ -1,18 +1,47 @@
 const studentTransferModel = require('./studentTransferModel')
-// const studentModel = require('../students/studentModel');
+const studentModel = require('../students/studentModel');
+const oldStudentModel = require('../students/oldstudentModel');
 const express = require('./studentTransferModel');
 const app = express()
 
-var createstudentTransfer = function(req, res) {
-    var transfer = new studentTransferModel(req.body)
+var createstudentTransfer = async function(req, res) {
+    var transfer = new studentTransferModel(req.body);
+    var oldstudent = new oldStudentModel(req.body);
+    await transfer.save();
+    await oldstudent.save();
+    var student = new studentModel()
+    student.name = transfer.name;
+    student.gender = transfer.gender;
+    student.fathername=transfer.fathername;
+    student.mothername=transfer.mothername;
+    student.aadharnumber=transfer.aadharnumber;
+    student.dob=transfer.dob;
+    student.mobilenumber=transfer.mobilenumber;
+    student.doj=transfer.doj;
+    student.standard=transfer.tostd;
+    student.bloodgroup=transfer.bloodgroup;
+    student.fatheroccupation=transfer.fatheroccupation;
+    student.motheroccupation=transfer.motheroccupation;
+    student.rollno=transfer.rollno;
+    student.fathermobilenumber=transfer.fathermobilenumber;
+    student.address.streetname=transfer.address.streetname;
+    student.address.statename=transfer.address.statename;
+    student.address.cityname=transfer.address.cityname;
+    student.schoolofyear=transfer.schoolofyear;
+    student.save();
+    res.json(student)
+
     // var _id=req.body._id
-    console.log(transfer)
-    transfer.save(function(err, result) {
-        if (err) return res.send('cannot add')
-        else {
-            res.send(result)
-        }
-    })
+    // console.log(transfer)
+    // transfer.save(function(err, result) {
+    //     if (err) return res.send('cannot add')
+    //     else {
+    //         res.send(result)
+    //     }
+    // })
+
+
+    
 }
 
 var getAllStudentsTransfer = function(req, res) {
