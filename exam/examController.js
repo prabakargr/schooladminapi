@@ -85,7 +85,6 @@ var findByStandardAndExam =function(req,res){
     var examName =req.body.examName;
     console.log(standard,examName);
     examModel.find({standard,examName},function(err,result){
-        console.log(result);
         if(err) return res.send("err");
         else return res.send(result);
     })
@@ -96,7 +95,6 @@ var findoldexambyyears =function(req,res){
     var standard = req.body.standard;
     var examName =req.body.examName;
     oldexamModel.find({standard,examName,examyear},function(err,result){
-        console.log(result);
         if(err) return res.send("err");
         else return res.send(result);
     })

@@ -14,7 +14,8 @@ const markModel=new Schema({
       totalmark:String,
       rollno:String,
       teacher:String,
-      examKey:String
+      examKey:String,
+      grade:String
  
 })
 module.exports=mongoose.model('mark',markModel);
