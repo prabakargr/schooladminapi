@@ -23,7 +23,8 @@ const studentsModel=new Schema({
         statename:String
     },
     schoolofyear:String,
-    studentKey:String
+    studentKey:String,
+    studentImage:String
 });
 
 

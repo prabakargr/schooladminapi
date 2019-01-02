@@ -1,8 +1,11 @@
 const studentModel = require('./studentModel')
 const express = require('./studentModel');
 const app = express();
+const mongoose = require("mongoose");
+const multer = require('multer');
 const oldStudentModel = require('./oldstudentModel');
 const sportsModel = require('../sports/sportsModel');
+
 var createStudent = function(req,res){
          var student = new studentModel(req.body);
          student.save(function(err,student){

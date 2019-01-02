@@ -26,9 +26,10 @@ var getAllTimeTable = function(req, res) {
 var deleteTimetable=function(req,res){
     var _id=req.body._id
     timetableModel.findByIdAndRemove({_id},function(err,timetable){
-            if(!err){
-                res.status(204);
-                res.send("removed");
+            if(err){
+                return res.send("cannot deleted")
+            }else {
+                res.send({"message":"Deleted successfully"})
             }
         });
 
@@ -51,9 +52,11 @@ var findByStandard =function(req,res){
     var day = req.body.day;
     console.log(standard);
     timetableModel.find({standard,day},function(err,result){
-        console.log(result);
-        if(err) return res.send("err");
-        else return res.send(result);
+        if(err){
+            return res.send("cannot deleted")
+        }else {
+            res.send(result)
+        }
     })
 }
 
@@ -63,7 +66,7 @@ var findByTeachers =function(req,res){
     console.log(teacherkey);
     timetableModel.find({teacherkey,day},function(err,result){
         console.log(result);
-        if(err) return res.send("err");
+        if(err) return res.send("Record Not Found");
         else return res.send(result);
     })
 }

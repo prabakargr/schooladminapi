@@ -7,13 +7,8 @@ var userModel=new Schema({
     email:String,
     password:String,
     role:String,
-    fname:String,
-    lname:String,
-    city:String,
-    postal:String,
-    aboutme:String,
-    address:String,
-    country:String
+    rollno:String
+    
 
 });
 

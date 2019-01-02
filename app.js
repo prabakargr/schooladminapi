@@ -36,6 +36,11 @@ const usersRouting = require('./users/usersRouting');
 const sportsRouting = require('./sports/sportsRouting');
 const timetableRouting =require('./timetable/timetableRouting');
 const markRouting=require('./mark/markRouting');
+
+
+const classRouting=require('./acadamic/routing/classRouting');
+const studentRouting=require('./studentsCollection/routings/studentRouting');
+
 app.set('json spaces', 40);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -54,6 +59,9 @@ app.use('/users',usersRouting);
 app.use('/sports',sportsRouting);
 app.use('/timetable',timetableRouting);
 app.use('/marks',markRouting);
+
+app.use('/class',classRouting);
+app.use('/student',studentRouting)
 var port = process.env.PORT || (3000);
 
 app.listen(port, () => console.log(`Running on localhost:3000`));

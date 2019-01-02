@@ -13,8 +13,9 @@ app.set('superSecret', config.secret);
 
 var adduser=function (req,res){
     var token = req.headers['x-access-token'];
-
-              
+    var rollno =req.body.rollno;
+    var role = req.body.role;
+    console.log(rollno)         
                 var id={
                     email:req.body.email,
                 }
@@ -22,6 +23,10 @@ var adduser=function (req,res){
                     console.log(result);
                     if(result===null){
                         var user=new User(req.body);
+                        if(role ==="student"){
+                            user.rollno= rollno;
+                            console.log(user.rollno)
+                        }
                         user.save(function(err){
                             if(err){
                                 res.send('cannot reqister')
@@ -48,11 +53,70 @@ var adduser=function (req,res){
 
 }
 
+var deleteuser = function(req,res){
+    var token = req.headers['x-access-token'];
+    var _id = req.body._id;
+    var role = req.body.role;
+    if(token){
+        jwt.verify(token,app.get('superSecret'),function(err,decoded){
+            if(err){
+                return res.json({success:false,message:'Faild To Find User'});
+            }else{
+                User.findByIdAndRemove({_id}, function(err, result) {
+                    if (err){
+                        return res.send("err");
+                    } 
+                    else {
+                        User.find({role},function(err,finduser){
+                         if (err) return res.send("err");
+                         else return res.send(finduser);
+                        })
+                    }
+                })
+            }
+        });
+    }else {
+    
+        // if there is no token
+        // return an error
+        return res.status(403).send({ 
+            success: false, 
+            message: 'No token provided.' 
+        });
+
+ 
+    };
+}
+
+var finduser=function(req,res){
+    var token = req.headers['x-access-token'];
+    var role = req.body.role;
+    if(token){
+        jwt.verify(token,app.get('superSecret'),function(err,decoded){
+            if(err){
+                return res.json({success:false,message:'Faild To Find User'});
+            }else{
+                User.find({role}, function(err, result) {
+                    if (err) return res.send("err");
+                    else return res.send(result);
+                })
+            }
+        });
+    }else {
+    
+        // if there is no token
+        // return an error
+        return res.status(403).send({ 
+            success: false, 
+            message: 'No token provided.' 
+        });
+
+ 
+    };
+}
 var getusers=function(req,res){
     var token = req.headers['x-access-token'];
-
     if (token) {
-
         // verifies secret and checks exp
         jwt.verify(token, app.get('superSecret'), function(err, decoded) {      
           if (err) {
@@ -62,9 +126,9 @@ var getusers=function(req,res){
             // req.decoded = decoded;    
             // next();
            User.find(function(err,users){
-    console.log(users)
-    res.send(users);
-})
+           console.log(users)
+           res.send(users);
+                         })
           }
         });
     
@@ -86,9 +150,8 @@ var login=function(req,res){
 
     // find the user
     User.findOne({
-        email: req.body.email
+         email: req.body.email
       }, function(err, user) {
-    
         if (err) {
             message:"login faild"
         }
@@ -133,4 +196,6 @@ var login=function(req,res){
     getusers:getusers,
     adduser:adduser,
     login:login,
+    finduser:finduser,
+    deleteuser:deleteuser
 }
