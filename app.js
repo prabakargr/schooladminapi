@@ -7,7 +7,8 @@ var path = require("path");
 
 
 // var app = express();
-var db = mongoose.connect("mongodb://localhost:27017/schoolApp",{ useNewUrlParser: true });
+// var db = mongoose.connect("mongodb://localhost:27017/schoolApp",{ useNewUrlParser: true });
+ var db = mongoose.connect("mongodb://admin123:admin12345@ds263740.mlab.com:63740/schooladmin",{ useNewUrlParser: true });
 
 const mongodb = require('mongodb');
 var config = require('./config');
